@@ -43,7 +43,7 @@ namespace SearchMyIndex
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.PageUp)
             {
                 if (ActiveControl == lstSearchResult && lstSearchResult.SelectedIndex <= 0)
                 {
@@ -51,7 +51,7 @@ namespace SearchMyIndex
                 }
             }
 
-            if (e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.PageDown)
             {
                 if (ActiveControl == txtSearchText)
                 {
@@ -178,12 +178,85 @@ namespace SearchMyIndex
             resultConfDictionary.Clear();
 
             List<string> searchResultList = new List<string>();
+            bool flagAll = (searchStr == "");
+            string[] splitSearchStrs = searchStr.Split(' ');
+            bool flagOR = false;
+
+            if (splitSearchStrs.Length >= 2 && splitSearchStrs[1] == "|")
+            {
+                // OR
+                if ((splitSearchStrs.Length % 2) == 0)
+                {
+                    MessageBox.Show(
+                        "OR(|)を使用する場合には、a | b 、a | b | c 等の形式で入力して下さい。",
+                        "エラー",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                for (int i = 0; i < splitSearchStrs.Length; i++)
+                {
+                    if ((i % 2) == 0 && splitSearchStrs[i].IndexOf('|') >= 0 ||
+                        (i % 2) == 1 && splitSearchStrs[i] != "|")
+                    {
+                        MessageBox.Show(
+                            "OR(|)を使用する場合には、a | b 、a | b | c 等の形式で入力して下さい。",
+                            "エラー",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                flagOR = true;
+            }
+            else if (searchStr.IndexOf('|') >= 0)
+            {
+                MessageBox.Show(
+                    "OR(|)を使用する場合には、a | b 、a | b | c 等の形式で入力して下さい。",
+                    "エラー",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
 
             for (int i = 0; i < fullNameList.Count; i++)
             {
                 string fullName = fullNameList[i];
+                bool flagMatch = true;
 
-                if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(fullName, searchStr, CompareOptions.IgnoreCase | CompareOptions.IgnoreWidth | CompareOptions.IgnoreKanaType) >= 0)
+                if (!flagAll)
+                {
+                    if (flagOR)
+                    {
+                        // OR
+                        flagMatch = false;
+
+                        for (int j = 0; j < splitSearchStrs.Length; j+=2)
+                        {
+                            if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(fullName, splitSearchStrs[j], CompareOptions.IgnoreCase | CompareOptions.IgnoreWidth | CompareOptions.IgnoreKanaType) >= 0)
+                            {
+                                flagMatch = true;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // AND
+                        for (int j = 0; j < splitSearchStrs.Length; j++)
+                        {
+                            if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(fullName, splitSearchStrs[j], CompareOptions.IgnoreCase | CompareOptions.IgnoreWidth | CompareOptions.IgnoreKanaType) < 0)
+                            {
+                                flagMatch = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (flagMatch)
                 {
                     searchResultList.Add(fullName);
 
@@ -192,7 +265,7 @@ namespace SearchMyIndex
                 }
             }
 
-            searchResultList.Sort();
+            searchResultList.Sort(new LogicalStringComparer());
 
             lstSearchResult.BeginUpdate();
 
