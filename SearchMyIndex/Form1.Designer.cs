@@ -32,11 +32,11 @@
             this.txtSearchText = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.lstSearchResult = new System.Windows.Forms.ListBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnConfig = new System.Windows.Forms.Button();
             this.lblMgssage = new System.Windows.Forms.Label();
             this.btnRebuildAll = new System.Windows.Forms.Button();
             this.btnRebuild = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // txtSearchText
@@ -65,7 +65,6 @@
             this.lstSearchResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstSearchResult.ContextMenuStrip = this.contextMenuStrip1;
             this.lstSearchResult.FormattingEnabled = true;
             this.lstSearchResult.ItemHeight = 12;
             this.lstSearchResult.Location = new System.Drawing.Point(13, 74);
@@ -75,6 +74,12 @@
             this.lstSearchResult.SelectedIndexChanged += new System.EventHandler(this.lstSearchResult_SelectedIndexChanged);
             this.lstSearchResult.Leave += new System.EventHandler(this.lstSearchResult_Leave);
             this.lstSearchResult.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstSearchResult_MouseDoubleClick);
+            this.lstSearchResult.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstSearchResult_MouseUp);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // btnConfig
             // 
@@ -118,16 +123,12 @@
             this.btnRebuild.UseVisualStyleBackColor = true;
             this.btnRebuild.Click += new System.EventHandler(this.btnRebuild_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 406);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.btnRebuild);
             this.Controls.Add(this.btnRebuildAll);
             this.Controls.Add(this.lblMgssage);

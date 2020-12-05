@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -176,6 +177,18 @@ namespace SearchMyIndex
         private void lstSearchResult_Leave(object sender, EventArgs e)
         {
             lblMgssage.Text = "";
+        }
+
+        private void lstSearchResult_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int index = lstSearchResult.IndexFromPoint(e.Location);
+                if (index != ListBox.NoMatches)
+                {
+                    lstSearchResult.SelectedItem = lstSearchResult.Items[index];
+                }
+            }
         }
 
         private void LoadMyIndexes()
