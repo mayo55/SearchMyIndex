@@ -662,6 +662,12 @@ namespace SearchMyIndex
             tsmi3.Click += Operation.DoCopyFile;
             contextMenuStrip1.Items.Add(tsmi3);
 
+            ToolStripMenuItem tsmi4 = new ToolStripMenuItem();
+            tsmi4.Text = Constant.MSG_DO_SELECT_EXPLORER;
+            tsmi4.ShortcutKeyDisplayString = ReplaceShowMenuString(Properties.Settings.Default.DoSelectExplorer);
+            tsmi4.Click += Operation.DoSelectExplorer;
+            contextMenuStrip1.Items.Add(tsmi4);
+
         }
 
         private string ReplaceShowMenuString(string str)

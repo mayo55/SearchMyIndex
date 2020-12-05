@@ -48,6 +48,7 @@ namespace SearchMyIndex
             dataGridView1.Rows[dataGridView1.Rows.Count - 1].ReadOnly = true;
 
             dataGridView1.Rows.Add(Constant.MSG_DO_COPY_FULL_NAME, Properties.Settings.Default.DoCopyFullName, Constant.ID_DO_COPY_FULL_NAME);
+            dataGridView1.Rows.Add(Constant.MSG_DO_CUT_FILE, Properties.Settings.Default.DoCutFile, Constant.ID_DO_CUT_FILE);
             dataGridView1.Rows.Add(Constant.MSG_DO_COPY_FILE, Properties.Settings.Default.DoCopyFile, Constant.ID_DO_COPY_FILE);
             dataGridView1.Rows.Add(Constant.MSG_DO_SELECT_EXPLORER, Properties.Settings.Default.DoSelectExplorer, Constant.ID_DO_SELECT_EXPLORER);
             dataGridView1.Rows.Add(Constant.MSG_DO_REBUILD, Properties.Settings.Default.DoRebuild, Constant.ID_DO_REBUILD);
