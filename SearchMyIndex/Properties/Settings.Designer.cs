@@ -12,7 +12,7 @@ namespace SearchMyIndex.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -56,6 +56,114 @@ namespace SearchMyIndex.Properties {
             }
             set {
                 this["MyIndexDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Shift+C")]
+        public string DoCopyFullName {
+            get {
+                return ((string)(this["DoCopyFullName"]));
+            }
+            set {
+                this["DoCopyFullName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+X")]
+        public string DoCutFile {
+            get {
+                return ((string)(this["DoCutFile"]));
+            }
+            set {
+                this["DoCutFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+C")]
+        public string DoCopyFile {
+            get {
+                return ((string)(this["DoCopyFile"]));
+            }
+            set {
+                this["DoCopyFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Shift+Enter")]
+        public string DoSelectExplorer {
+            get {
+                return ((string)(this["DoSelectExplorer"]));
+            }
+            set {
+                this["DoSelectExplorer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F5,Ctrl+R")]
+        public string DoRebuild {
+            get {
+                return ((string)(this["DoRebuild"]));
+            }
+            set {
+                this["DoRebuild"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+F5")]
+        public string DoRebuildAll {
+            get {
+                return ((string)(this["DoRebuildAll"]));
+            }
+            set {
+                this["DoRebuildAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("@")]
+        public string DoConfig {
+            get {
+                return ((string)(this["DoConfig"]));
+            }
+            set {
+                this["DoConfig"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExecCommand1 {
+            get {
+                return ((string)(this["ExecCommand1"]));
+            }
+            set {
+                this["ExecCommand1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExecCommand2 {
+            get {
+                return ((string)(this["ExecCommand2"]));
+            }
+            set {
+                this["ExecCommand2"] = value;
             }
         }
     }

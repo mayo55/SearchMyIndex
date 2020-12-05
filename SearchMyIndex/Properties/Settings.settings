@@ -11,5 +11,32 @@
     <Setting Name="MyIndexDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\MyIndex</Value>
     </Setting>
+    <Setting Name="DoCopyFullName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Shift+C</Value>
+    </Setting>
+    <Setting Name="DoCutFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+X</Value>
+    </Setting>
+    <Setting Name="DoCopyFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+C</Value>
+    </Setting>
+    <Setting Name="DoSelectExplorer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Shift+Enter</Value>
+    </Setting>
+    <Setting Name="DoRebuild" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F5,Ctrl+R</Value>
+    </Setting>
+    <Setting Name="DoRebuildAll" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+F5</Value>
+    </Setting>
+    <Setting Name="DoConfig" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@</Value>
+    </Setting>
+    <Setting Name="ExecCommand1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ExecCommand2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
