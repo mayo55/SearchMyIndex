@@ -210,12 +210,14 @@ namespace SearchMyIndex
         private void LoadMyIndex(string index)
         {
             Dictionary<string, string> conf = new Dictionary<string, string>();
+            int lineNo = 0;
 
             using (StreamReader sr = new StreamReader(index, Encoding.GetEncoding("shift_jis")))
             {
                 while (sr.Peek() > -1)
                 {
                     string lineStr = sr.ReadLine();
+                    lineNo++;
 
                     if (lineStr == "")
                     {
@@ -233,43 +235,57 @@ namespace SearchMyIndex
                     conf[key] = value;
                 }
 
-                if (String.Compare(conf[CONFKEY_COMPUTERNAME], Environment.MachineName, true) == 0)
+                try
                 {
-                    // インデックスと同じPC
-
-                    string dir = conf[CONFKEY_DIR];
-
-                    while (sr.Peek() > -1)
+                    if (String.Compare(conf[CONFKEY_COMPUTERNAME], Environment.MachineName, true) == 0 || !conf.ContainsKey(CONFKEY_SHARE_DIR))
                     {
-                        string lineStr = sr.ReadLine();
+                        // インデックスと同じPCか、インデックスと異なるPCでshareDir指定なし
 
-                        if (lineStr != "")
+                        string dir = conf[CONFKEY_DIR];
+
+                        while (sr.Peek() > -1)
                         {
-                            confList.Add(conf);
+                            string lineStr = sr.ReadLine();
+                            lineNo++;
 
-                            string fullName = Path.Combine(dir, lineStr);
-                            fullNameList.Add(fullName);
+                            if (lineStr != "")
+                            {
+                                confList.Add(conf);
+
+                                string fullName = Path.Combine(dir, lineStr);
+                                fullNameList.Add(fullName);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // インデックスと異なるPC
+
+                        string shareDir = conf[CONFKEY_SHARE_DIR];
+
+                        while (sr.Peek() > -1)
+                        {
+                            string lineStr = sr.ReadLine();
+                            lineNo++;
+
+                            if (lineStr != "")
+                            {
+                                confList.Add(conf);
+
+                                string fullName = Path.Combine(shareDir, lineStr);
+                                fullNameList.Add(fullName);
+                            }
                         }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    // インデックスと異なるPC
-
-                    string shareDir = conf[CONFKEY_SHARE_DIR];
-
-                    while (sr.Peek() > -1)
-                    {
-                        string lineStr = sr.ReadLine();
-
-                        if (lineStr != "")
-                        {
-                            confList.Add(conf);
-
-                            string fullName = Path.Combine(shareDir, lineStr);
-                            fullNameList.Add(fullName);
-                        }
-                    }
+                    MessageBox.Show(
+                        index + " の " + lineNo + "行目でエラーが発生しました。" + Environment.NewLine + ex.Message,
+                        "エラー",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    throw;
                 }
             }
         }
@@ -363,7 +379,14 @@ namespace SearchMyIndex
                     searchResultList.Add(fullName);
 
                     Dictionary<string, string> conf = confList[i];
-                    resultConfDictionary.Add(fullName, conf);
+                    try
+                    {
+                        resultConfDictionary.Add(fullName, conf);
+                    }
+                    catch (Exception ex)
+                    {
+                        // 登録済みの場合には無視する
+                    }
                 }
             }
 
